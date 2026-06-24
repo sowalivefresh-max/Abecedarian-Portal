@@ -1,7 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-  <?!= include('Styles') ?>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="aa-layout">
@@ -343,13 +346,14 @@
     </div>
   </div>
 
-  <?!= include('Scripts') ?>
+  <script src="api.js"></script>
+  <script src="scripts.js"></script>
   <script>
     var currentTerm = ''; var currentSession = '';
     var myClass = ''; var myStudents = []; var mySubjects = [];
 
     document.addEventListener('DOMContentLoaded', function() {
-      initTabs('pt-tabs'); AA.init("<?= sessionToken ?>", "<?= scriptUrl ?>");
+      initTabs('pt-tabs'); AA.init();
       document.getElementById('attDate').valueAsDate = new Date();
       function initDashboard() {
         if (!AA.user || !AA.settings || !AA.settings.current_term) return setTimeout(initDashboard, 100);
