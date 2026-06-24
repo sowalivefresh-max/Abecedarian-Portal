@@ -159,23 +159,20 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:ce
   </div>
 </div>
 
+<script src="api.js"></script>
 <script>
-// Load branding
+// Load branding on page load
 document.getElementById('copyYear').textContent = new Date().getFullYear();
-google.script.run
-  .withSuccessHandler(function(b) {
+
+runBackendAction('getPublicBranding', [])
+  .then(function(b) {
     if (b.school_name) {
       document.getElementById('schoolName').textContent = b.school_name;
       document.title = b.school_name + ' — School Portal';
-      
-      // Hide icon and show initials
-      var initials = b.school_name.split(' ').map(function(w){return w[0]}).join('').toUpperCase().substring(0,2);
+      var initials = b.school_name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().substring(0,2);
       var textEl = document.getElementById('logoText');
       var iconEl = document.getElementById('logoPlaceholder');
-      if (textEl) {
-        textEl.textContent = initials;
-        textEl.style.display = 'block';
-      }
+      if (textEl) { textEl.textContent = initials; textEl.style.display = 'block'; }
       if (iconEl) iconEl.style.display = 'none';
     }
     if (b.school_motto) document.getElementById('schoolMotto').textContent = '"' + b.school_motto + '"';
@@ -185,7 +182,16 @@ google.script.run
       wrap.classList.add('has-logo');
     }
   })
-  .getPublicBranding();
+  .catch(function(e) { console.warn('Could not load branding:', e); });
+
+// Dashboard file mapping per role
+var DASHBOARD_MAP = {
+  admin: 'AdminDashboard.html', admin_assistant: 'AdminDashboard.html',
+  principal: 'PrincipalDashboard.html', vp: 'VPDashboard.html',
+  headteacher: 'HeadTeacherDashboard.html', teacher: 'TeacherDashboard.html',
+  primary_teacher: 'PrimaryTeacherDashboard.html', accounts: 'AccountsDashboard.html',
+  parent: 'ParentDashboard.html'
+};
 
 function togglePwd() {
   var inp = document.getElementById('loginPassword');
@@ -205,50 +211,21 @@ function doLogin() {
     errEl.style.display = 'block'; return;
   }
 
-  // Show loading
+  // Show loading spinner
   document.getElementById('loginBtn').disabled = true;
   document.getElementById('btnSpinner').style.display = 'block';
   document.getElementById('btnText').style.display = 'none';
 
-    google.script.run
-    .withSuccessHandler(function(res) {
+  runBackendAction('loginUser', [email, pass])
+    .then(function(res) {
       if (res.success) {
-        // Update text to indicate redirection
         document.getElementById('btnText').textContent = 'Redirecting...';
         document.getElementById('btnText').style.display = 'block';
-        
-        var url = res.url;
-        if (url) {
-          // 1. Official Google Apps Script redirection
-          if (google.script.host && google.script.host.setWindowLocation) {
-            try { google.script.host.setWindowLocation(url); } catch(e) {}
-          }
-          
-          // 2. Browser-level redirection (Method A: replace)
-          setTimeout(function() { 
-            try { window.top.location.replace(url); } catch(e) {} 
-          }, 400);
 
-          // 3. Browser-level redirection (Method B: href)
-          setTimeout(function() { 
-            try { window.top.location.href = url; } catch(e) {} 
-          }, 800);
-          
-          // 4. Manual Fallback - This is the "Unblockable" method if auto-redirect fails
-          setTimeout(function() {
-            errEl.innerHTML = '<div style="margin-top:10px;padding:10px;background:rgba(240,165,0,0.15);border-radius:8px;border:1px solid var(--aa-gold);">' +
-                              '<div style="color:#fff;font-size:12px;margin-bottom:8px;">Almost there! If you are not redirected automatically:</div>' +
-                              '<a href="' + url + '" target="_top" style="display:inline-block;padding:8px 16px;background:#f0a500;color:#0d1b2a;text-decoration:none;font-weight:700;border-radius:6px;font-size:13px;">' +
-                              '<i class="fa fa-external-link-alt"></i> OPEN DASHBOARD NOW</a>' +
-                              '</div>';
-            errEl.style.display = 'block';
-            resetLoginBtn();
-          }, 1500);
-        } else {
-          errEl.textContent = 'Login successful, but dashboard URL not found.';
-          errEl.style.display = 'block';
-          resetLoginBtn();
-        }
+        // Determine the correct dashboard HTML file based on role
+        var dashboard = DASHBOARD_MAP[res.role] || 'Login.html';
+        var redirectUrl = dashboard + '?token=' + encodeURIComponent(res.token);
+        window.location.href = redirectUrl;
       } else {
         errEl.textContent = res.message || 'Login failed. Please try again.';
         errEl.style.display = 'block';
@@ -256,12 +233,11 @@ function doLogin() {
         resetLoginBtn();
       }
     })
-    .withFailureHandler(function(err) {
-      errEl.textContent = 'Connection error: ' + (err.message || 'Please check your internet.');
+    .catch(function(err) {
+      errEl.textContent = 'Connection error. Please check your internet connection.';
       errEl.style.display = 'block';
       resetLoginBtn();
-    })
-    .loginUser(email, pass);
+    });
 }
 
 function resetLoginBtn() {
@@ -291,24 +267,27 @@ function closeResetModal() {
 function doRequestReset() {
   var email = document.getElementById('resetEmail').value.trim();
   if (!email) return;
-  
   var btn = document.getElementById('resetBtn');
   var msg = document.getElementById('resetMsg');
   btn.disabled = true;
   btn.textContent = 'Processing...';
-  
-  google.script.run
-    .withSuccessHandler(function(res) {
+
+  runBackendAction('requestPasswordReset', [email])
+    .then(function(res) {
       btn.disabled = false;
       btn.textContent = 'Submit Request';
       msg.textContent = res.message;
       msg.style.color = res.success ? '#4ade80' : '#fca5a5';
       msg.style.display = 'block';
-      if (res.success) {
-        setTimeout(closeResetModal, 3000);
-      }
+      if (res.success) setTimeout(closeResetModal, 3000);
     })
-    .requestPasswordReset(email);
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = 'Submit Request';
+      msg.textContent = 'Connection error. Please try again.';
+      msg.style.color = '#fca5a5';
+      msg.style.display = 'block';
+    });
 }
 </script>
 </body>
