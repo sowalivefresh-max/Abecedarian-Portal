@@ -1,10 +1,10 @@
-<script>
+﻿<script>
 /* ============================================================
-   ABECEDARIAN ACADEMY — Shared Frontend JavaScript
+   ABECEDARIAN ACADEMY â€” Shared Frontend JavaScript
    All dashboards include this file via <?!= include('Scripts') ?>
    ============================================================ */
 
-// ─── Session Management ──────────────────────────────────────
+// â”€â”€â”€ Session Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 var AA = {
   token: null,
@@ -151,7 +151,7 @@ var AA = {
   }
 };
 
-// ─── Server Call Wrapper ─────────────────────────────────────
+// â”€â”€â”€ Server Call Wrapper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 /**
  * Wrapper for google.script.run with loading state management.
@@ -184,7 +184,7 @@ function callServer(fn, args, onSuccess, onError, showLoader) {
   }
 }
 
-// ─── Loading Overlay ─────────────────────────────────────────
+// â”€â”€â”€ Loading Overlay â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function showLoading(text) {
   var el = document.getElementById('aa-loading');
@@ -205,7 +205,7 @@ function hideLoading() {
   if (el) el.style.display = 'none';
 }
 
-// ─── Toast Notifications ─────────────────────────────────────
+// â”€â”€â”€ Toast Notifications â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function showToast(message, type, duration) {
   var container = document.getElementById('aa-toast-container');
@@ -215,20 +215,20 @@ function showToast(message, type, duration) {
     document.body.appendChild(container);
   }
 
-  var icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
+  var icons = { success: 'âœ…', error: 'âŒ', warning: 'âš ï¸', info: 'â„¹ï¸' };
   var t = type || 'info';
 
   var toast = document.createElement('div');
   toast.className = 'aa-toast ' + t;
-  toast.innerHTML = '<span class="aa-toast-icon">' + (icons[t] || 'ℹ️') + '</span>' +
+  toast.innerHTML = '<span class="aa-toast-icon">' + (icons[t] || 'â„¹ï¸') + '</span>' +
     '<span class="aa-toast-msg">' + message + '</span>' +
-    '<button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;padding:0 0 0 8px;color:#888;font-size:16px;">×</button>';
+    '<button onclick="this.parentElement.remove()" style="background:none;border:none;cursor:pointer;padding:0 0 0 8px;color:#888;font-size:16px;">Ã—</button>';
   container.appendChild(toast);
 
   setTimeout(function() { if (toast.parentNode) toast.remove(); }, duration || 4000);
 }
 
-// ─── Tab System ───────────────────────────────────────────────
+// â”€â”€â”€ Tab System â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function initTabs(tabGroupId) {
   var group = document.getElementById(tabGroupId);
@@ -251,7 +251,7 @@ function switchTab(tabGroupId, tabId) {
   if (tab) tab.click();
 }
 
-// ─── Modal System ─────────────────────────────────────────────
+// â”€â”€â”€ Modal System â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function openModal(id) {
   var m = document.getElementById(id);
@@ -271,7 +271,7 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// ─── Sidebar ──────────────────────────────────────────────────
+// â”€â”€â”€ Sidebar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function initSidebar() {
   var toggle = document.getElementById('aa-menu-toggle');
@@ -289,7 +289,7 @@ function initSidebar() {
   });
 }
 
-// ─── Nav Item Activation ──────────────────────────────────────
+// â”€â”€â”€ Nav Item Activation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function setActiveNav(id) {
   document.querySelectorAll('.aa-nav-item').forEach(function(el) { el.classList.remove('active'); });
@@ -297,7 +297,7 @@ function setActiveNav(id) {
   if (el) el.classList.add('active');
 }
 
-// ─── Form Utilities ───────────────────────────────────────────
+// â”€â”€â”€ Form Utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function getFormData(formId) {
   var form = document.getElementById(formId);
@@ -340,7 +340,7 @@ function setFormData(formId, data) {
   });
 }
 
-// ─── Table Utilities ──────────────────────────────────────────
+// â”€â”€â”€ Table Utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function buildTable(tableId, columns, rows, actionFn) {
   var tbody = document.querySelector('#' + tableId + ' tbody');
@@ -367,7 +367,7 @@ function filterTable(inputId, tableId) {
   });
 }
 
-// ─── Formatting Utilities ────────────────────────────────────
+// â”€â”€â”€ Formatting Utilities â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function safeFloat(val, def) {
   var f = parseFloat(val);
@@ -376,7 +376,7 @@ function safeFloat(val, def) {
 
 function formatNaira(amount) {
   var n = parseFloat(amount) || 0;
-  return '₦' + n.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return 'â‚¦' + n.toLocaleString('en-NG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 function formatDate(dateStr) {
@@ -420,7 +420,7 @@ function formatAttPct(pct) {
   return '<span style="font-weight:600;color:' + color + '">' + n + '%</span>';
 }
 
-// ─── Pagination ───────────────────────────────────────────────
+// â”€â”€â”€ Pagination â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 var paginationState = {};
 
@@ -436,13 +436,13 @@ function renderPagination(containerId, total, pageSize, currentPage, onPage) {
   if (totalPages <= 1) { el.innerHTML = ''; return; }
   var html = '<div class="d-flex align-items-center gap-2" style="font-size:12px;">';
   html += '<span class="text-muted">Page ' + currentPage + ' of ' + totalPages + '</span>';
-  html += '<button class="aa-btn aa-btn-outline aa-btn-xs" ' + (currentPage <= 1 ? 'disabled' : '') + ' onclick="(' + onPage + ')(' + (currentPage - 1) + ')">‹ Prev</button>';
-  html += '<button class="aa-btn aa-btn-outline aa-btn-xs" ' + (currentPage >= totalPages ? 'disabled' : '') + ' onclick="(' + onPage + ')(' + (currentPage + 1) + ')">Next ›</button>';
+  html += '<button class="aa-btn aa-btn-outline aa-btn-xs" ' + (currentPage <= 1 ? 'disabled' : '') + ' onclick="(' + onPage + ')(' + (currentPage - 1) + ')">â€¹ Prev</button>';
+  html += '<button class="aa-btn aa-btn-outline aa-btn-xs" ' + (currentPage >= totalPages ? 'disabled' : '') + ' onclick="(' + onPage + ')(' + (currentPage + 1) + ')">Next â€º</button>';
   html += '</div>';
   el.innerHTML = html;
 }
 
-// ─── Confirm Dialog ───────────────────────────────────────────
+// â”€â”€â”€ Confirm Dialog â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function aaConfirm(message, onConfirm) {
   var existing = document.getElementById('aa-confirm-modal');
@@ -465,7 +465,7 @@ function aaConfirm(message, onConfirm) {
   };
 }
 
-// ─── PDF Viewer ───────────────────────────────────────────────
+// â”€â”€â”€ PDF Viewer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function openPDFViewer(previewUrl, downloadUrl, title) {
   var existing = document.getElementById('aa-pdf-modal');
@@ -475,18 +475,18 @@ function openPDFViewer(previewUrl, downloadUrl, title) {
   modal.className = 'aa-modal-backdrop open';
   modal.innerHTML = '<div class="aa-modal aa-modal-lg">' +
     '<div class="aa-modal-header">' +
-    '<h5 class="aa-modal-title">📄 ' + (title || 'Document Viewer') + '</h5>' +
-    '<button class="aa-modal-close" onclick="document.getElementById(\'aa-pdf-modal\').remove()">×</button></div>' +
+    '<h5 class="aa-modal-title">ðŸ“„ ' + (title || 'Document Viewer') + '</h5>' +
+    '<button class="aa-modal-close" onclick="document.getElementById(\'aa-pdf-modal\').remove()">Ã—</button></div>' +
     '<div class="aa-modal-body" style="padding:0;">' +
     '<iframe src="' + previewUrl + '" style="width:100%;height:70vh;border:none;"></iframe></div>' +
     '<div class="aa-modal-footer">' +
     '<button class="aa-btn aa-btn-outline" onclick="document.getElementById(\'aa-pdf-modal\').remove()">Close</button>' +
-    '<a href="' + downloadUrl + '" target="_blank" class="aa-btn aa-btn-gold">⬇ Download</a>' +
+    '<a href="' + downloadUrl + '" target="_blank" class="aa-btn aa-btn-gold">â¬‡ Download</a>' +
     '</div></div>';
   document.body.appendChild(modal);
 }
 
-// ─── Export Table to CSV ──────────────────────────────────────
+// â”€â”€â”€ Export Table to CSV â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function exportTableCSV(tableId, filename) {
   var table = document.getElementById(tableId);
@@ -503,7 +503,7 @@ function exportTableCSV(tableId, filename) {
   link.click();
 }
 
-// ─── Score Colour Helper ─────────────────────────────────────
+// â”€â”€â”€ Score Colour Helper â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 function scoreColor(score) {
   var n = parseFloat(score) || 0;
@@ -514,7 +514,7 @@ function scoreColor(score) {
   return '#dc2626';
 }
 
-// ─── DOM Ready ────────────────────────────────────────────────
+// â”€â”€â”€ DOM Ready â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 // -- Client-Side Image Resizing & Compression --
 function resizeAndCompressImage(file, maxDim, quality, callback) {

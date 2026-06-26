@@ -3,8 +3,11 @@
  * Centralized API client for communicating with the Google Apps Script Backend.
  */
 
-// REPLACE THIS WITH YOUR GOOGLE APPS SCRIPT WEB APP DEPLOYMENT URL
-const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzrXGEyWa2vaegguF7i1iAP2Isymjf0t-3rkHswyF4T6eVkP47YTFPzx9xKje9FhzMOWg/exec";
+// ─── DEPLOYMENT CONFIGURATION ────────────────────────────────────────────────
+// Replace the URL below with your own Google Apps Script Web App deployment URL.
+// You get this URL from: Apps Script → Deploy → Manage deployments → Web App URL
+// ─────────────────────────────────────────────────────────────────────────────
+const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzX9vzy75p6Q6UH93m-y8EKoemJadilMVJ8m_ANlcI2zdVTIVBqyJW4P4uQqeS4s4eP/exec";
 
 /**
  * Calls a backend function.
@@ -21,11 +24,11 @@ async function runBackendAction(action, args = []) {
         "Content-Type": "text/plain;charset=utf-8" // Important: text/plain prevents CORS preflight issues with Apps Script
       }
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     const data = await response.json();
     return data;
   } catch (error) {

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abecedarian Academy — Admin Dashboard</title>
+  <title>School Management Portal</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -15,7 +15,7 @@
       <div class="aa-sidebar-brand">
         <div class="aa-brand-icon">AA</div>
         <div class="aa-brand-text">
-          <div class="aa-brand-name" id="sb-school-name">Abecedarian Academy</div>
+          <div class="aa-brand-name" id="sb-school-name">Loading\u2026</div>
           <div class="aa-brand-role">Administrator</div>
         </div>
       </div>
@@ -310,12 +310,12 @@
           <div class="aa-grid-3 mb-4">
              <div class="aa-stat-card">
                <div class="aa-stat-icon bg-success"><i class="fa fa-hand-holding-usd"></i></div>
-               <div class="aa-stat-value" id="fin-income">₦0.00</div>
+               <div class="aa-stat-value" id="fin-income">â‚¦0.00</div>
                <div class="aa-stat-label">Total Income</div>
              </div>
              <div class="aa-stat-card">
                <div class="aa-stat-icon bg-danger"><i class="fa fa-file-invoice-dollar"></i></div>
-               <div class="aa-stat-value" id="fin-expense">₦0.00</div>
+               <div class="aa-stat-value" id="fin-expense">â‚¦0.00</div>
                <div class="aa-stat-label">Total Expenses</div>
              </div>
              <div class="aa-stat-card">
@@ -483,7 +483,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title" id="userModalTitle">Add/Edit User</h5>
-        <button class="aa-modal-close" onclick="closeModal('userModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('userModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <form id="userForm">
@@ -556,7 +556,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Add/Edit Student</h5>
-        <button class="aa-modal-close" onclick="closeModal('studentModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('studentModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <form id="studentForm">
@@ -623,7 +623,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Add/Edit Class</h5>
-        <button class="aa-modal-close" onclick="closeModal('classModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('classModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <form id="classForm">
@@ -659,7 +659,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Add/Edit Subject</h5>
-        <button class="aa-modal-close" onclick="closeModal('subjectModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('subjectModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <form id="subjectForm">
@@ -701,7 +701,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title" id="bulkImportTitle">Bulk Import</h5>
-        <button class="aa-modal-close" onclick="closeModal('bulkImportModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('bulkImportModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <p id="bulkImportDesc" class="text-muted fs-14 mb-3"></p>
@@ -726,7 +726,7 @@
     <div class="aa-modal aa-modal-lg">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Manage Student Subjects</h5>
-        <button class="aa-modal-close" onclick="closeModal('enrollmentModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('enrollmentModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <div id="enrollment-student-info" class="mb-3 fw-600"></div>
@@ -752,7 +752,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Add/Edit Grade Rule</h5>
-        <button class="aa-modal-close" onclick="closeModal('gradingModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('gradingModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <form id="gradingForm">
@@ -789,7 +789,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">My Profile</h5>
-        <button class="aa-modal-close" onclick="closeModal('profileModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('profileModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <div class="text-center mb-4">
@@ -838,7 +838,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Manual Password Reset</h5>
-        <button class="aa-modal-close" onclick="closeModal('manualResetModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('manualResetModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <input type="hidden" id="resetReqId">
@@ -863,7 +863,7 @@
     <div class="aa-modal">
       <div class="aa-modal-header">
         <h5 class="aa-modal-title">Review Parent Payment</h5>
-        <button class="aa-modal-close" onclick="closeModal('reviewPaymentModal')">×</button>
+        <button class="aa-modal-close" onclick="closeModal('reviewPaymentModal')">Ã—</button>
       </div>
       <div class="aa-modal-body">
         <input type="hidden" id="revPayId">
@@ -1160,7 +1160,7 @@
         callServer('adminGenerateBulkResult', [AA.token, className, currentTerm, currentSession, rptType], function(res) {
           if(res.success) {
             showToast('Bulk results ready!', 'success');
-            openPDFViewer(res.previewUrl, res.downloadUrl, className + ' — Bulk Results');
+            openPDFViewer(res.previewUrl, res.downloadUrl, className + ' â€” Bulk Results');
           } else {
             showToast(res.message || 'Failed to generate results.', 'error');
           }

@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abecedarian Academy — School Portal</title>
+<title>School Portal â€” Login</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -95,7 +95,7 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:ce
         <i class="fa fa-school" id="logoPlaceholder" style="font-size:32px;color:#0d1b2a;"></i>
         <span class="login-logo-text" id="logoText" style="display:none;">AA</span>
       </div>
-      <div class="login-school-name" id="schoolName">Abecedarian Academy</div>
+      <div class="login-school-name" id="schoolName">Loadingâ€¦</div>
       <div class="login-motto" id="schoolMotto">Excellence in Education</div>
       <div class="login-subtitle">School Management Portal</div>
     </div>
@@ -136,7 +136,7 @@ body{font-family:'Inter',sans-serif;min-height:100vh;display:flex;align-items:ce
     </form>
 
     <div class="login-footer">
-      &copy; <span id="copyYear"></span> Abecedarian Academy &bull; Secure Portal
+      &copy; <span id="copyYear"></span> <span id="footerSchoolName">School Portal</span> &bull; Secure Portal
     </div>
   </div>
 </div>
@@ -168,7 +168,9 @@ runBackendAction('getPublicBranding', [])
   .then(function(b) {
     if (b.school_name) {
       document.getElementById('schoolName').textContent = b.school_name;
-      document.title = b.school_name + ' — School Portal';
+      document.title = b.school_name + ' â€” School Portal';
+      var footerEl = document.getElementById('footerSchoolName');
+      if (footerEl) footerEl.textContent = b.school_name;
       var initials = b.school_name.split(' ').map(function(w){return w[0];}).join('').toUpperCase().substring(0,2);
       var textEl = document.getElementById('logoText');
       var iconEl = document.getElementById('logoPlaceholder');
